@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% allan-ver1.1.sty
-% Updated on Feb 7 2022 by Allan Pan
-% Update Detail: added the custom section and content style, also added 'techlnk' command.
+% allan.sty
+% Updated on Feb 9 2022 by Allan Pan
+% Update Detail: added subsection and several other styles, including contents.
 
 % Allan Pan all rights reserved.
 
@@ -48,6 +48,10 @@
 % for title
 \usepackage{titlesec}
 \titleformat{\section}{\color{black}\normalfont\sffamily\huge\bfseries}{\color{allandarkblue} Section \textbf{\thesection}}{0.5cm}{}
+\titleformat{\subsection}{\color{black}\normalfont\sffamily\large\bfseries}{\color{allandarkblue} \textbf{§ \thesubsection}}{0.3cm}{}
+
+% for hyperlink
+\usepackage[colorlinks, linkcolor = allandarkblue]{hyperref}
 
 % for headers
 \usepackage[english]{babel}
@@ -106,6 +110,8 @@
 \newcommand{\du}{^\circ}
 
 \newenvironment{techlnk}[1]{\color{allandarkblue}\fontfamily{qcr}\selectfont{#1}\normalfont\color{black}}
+
+\newcommand{\defword}[1]{\textbf{\color{allandarkblue} #1}\color{black}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Part Four - basic environments and display styles
