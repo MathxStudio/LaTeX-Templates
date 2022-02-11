@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% allan-ver1.2.sty
-% Updated on Feb 9 2022 by Allan Pan
-% Update Detail: added subsection and several other styles, including contents.
+% allan-ver1.3.sty
+% Updated on Feb 11 2022 by Allan Pan
+% Update Detail: fixed display gaps with the lstlisting environment.
 
 % Allan Pan all rights reserved.
 
@@ -14,6 +14,9 @@
 % want to type \mathbb{C}, you can simply type \CC. For commands defined with a '[]' in the
 % middle, it means that you can use certain parameters. e.g. \newcommand{\lleq}[1]{\xlongequal{\mathrm{#1}}}.
 % If you want to type '\xlongequal{\mathrm{Lemma}}', you can simply type '\lleq{Lemma}'.
+
+% Problem with the 'lstlisting' environment: please make sure that there are EXACTLY 16 (or usually 4
+% TAB sizes) before the leftmost character.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -112,27 +115,54 @@
 \newenvironment{techlnk}[1]{\color{allandarkblue}\fontfamily{qcr}\selectfont{#1}\normalfont\color{black}}
 
 \newcommand{\defword}[1]{\textbf{\color{allandarkblue} #1}\color{black}}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Part Four - basic environments and display styles
+
+% for numbered equations
+\newcommand{\sub}[1]{\mdfsubtitle{#1}}
+\newcounter{alemma}[section]
+\newcounter{asublemma}[section]
+\newcommand{\showlemma}{\thesection.\arabic{alemma}}
+\newcommand{\showsublemma}{\thesection.\arabic{asublemma}}
+\newcommand{\updatelemma}{\refstepcounter{alemma}}
+\newcommand{\updatesublemma}{\refstepcounter{asublemma}}
+\newcommand{\sublemma}{\sub{\color{allanred} Proof of Lemma \updatesublemma\showsublemma}}
+
+\newcounter{aclaim}[section]
+\newcounter{asubclaim}[section]
+\newcommand{\showclaim}{\thesection.\arabic{aclaim}}
+\newcommand{\showsubclaim}{\thesection.\arabic{asubclaim}}
+\newcommand{\updateclaim}{\refstepcounter{aclaim}}
+\newcommand{\updatesubclaim}{\refstepcounter{asubclaim}}
+\newcommand{\subclaim}{\sub{\color{allanorange} Proof of Claim \updatesubclaim\showsubclaim}}
+
+\newcounter{afact}[section]
+\newcounter{asubfact}[section]
+\newcommand{\showfact}{\thesection.\arabic{afact}}
+\newcommand{\showsubfact}{\thesection.\arabic{asubfact}}
+\newcommand{\updatefact}{\refstepcounter{afact}}
+\newcommand{\updatesubfact}{\refstepcounter{asubfact}}
+\newcommand{\subfact}{\sub{\color{allangreen} Proof of Fact \updatesubfact\showsubfact}}
 
 % for pseudocode
 \lstset{
 	language=python, 					% Python highlight
 	linewidth=\linewidth,      		    % width of list
-	%basicstyle=\ttfamily,				% tt can't show space
+	basicstyle=\tt,
 	commentstyle=\color{commentcolor},
 	keywordstyle=\color{keywordcolor},
 	stringstyle=\color{stringcolor},
+    showstringspaces = false,
 	showspaces=false,
 	numbers=left,						% line numbers on the left
 	numberstyle=\tiny\emptyaccsupp,
 	numbersep=5pt,
 	framerule=0pt,
 	emptylines=1,						% empty lines more than one will be considered as one empty line
-	xleftmargin=0.2cm,
+	xleftmargin=0.5cm,
 	tabsize=4,
-	gobble=4							% omit first 4 characters of each line
+	gobble=15							% omit first 4 characters of each line
+    %
 }
 
 \newmdenv[%
@@ -147,7 +177,7 @@
     backgroundcolor = allanred!5,%
     %
     % frametitle settings
-    frametitle = {\color{allanred} Lemma},
+    frametitle = {\color{allanred} Lemma \updatelemma\showlemma},
     frametitlerule = true,
     frametitlebackgroundcolor = allanred!15,%
     %
@@ -181,7 +211,7 @@
     backgroundcolor = allangreen!5,%
     %
     % frametitle settings
-    frametitle = {\color{allangreen} Fact},
+    frametitle = {\color{allangreen} Fact \updatefact\showfact},
     frametitlerule = true,
     frametitlebackgroundcolor = allangreen!15,%
     %
@@ -207,7 +237,7 @@
     backgroundcolor = allanorange!5,%
     %
     % frametitle settings
-    frametitle = {\color{allanorange} Claim},
+    frametitle = {\color{allanorange} Claim \updateclaim\showclaim},
     frametitlerule = true,
     frametitlebackgroundcolor = allanorange!15,%
     %
