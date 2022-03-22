@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% allan-ver1.3.sty
+% allan-eason.sty
 % Updated on Mar 22 2022 by Eason Shao
 % Update Detail: Change Version.
 
@@ -27,6 +27,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Part One - packages needed
 
+\usepackage{tikz}
+\usepackage{ctex}
+
+\usepackage{soul}
+\usepackage{longtable}
 % for colored frames
 \usepackage[framemethod=TikZ]{mdframed}
 \usetikzlibrary{shadows}
@@ -39,14 +44,18 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{geometry}
 
 % for python code
 \usepackage{accsupp}
 \newcommand{\emptyaccsupp}[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
 \usepackage{listings}
+\usepackage{clrscode3e}
 
 % for font
 \usepackage[T1]{fontenc}
+\usepackage{enumitem}
 
 % for title
 \usepackage{titlesec}
@@ -114,7 +123,7 @@
 \newcommand{\degree}{^\circ}
 \newcommand{\sgn}{\mathrm{sgn}}
 \newcommand{\YS}{\text{原式}}
-\newcommand{\d}{\mathrm{d}}
+\newcommand{\diff}{\mathrm{d}} % differential
 \newcommand{\authornote}[1]{\textit{\textcolor{allanpurple}{ #1 }}}
 \newcommand{\calculator}[1]{\textcolor{allanorange}{ #1 }}
 \newcommand{\answer}[1]{\textbf{\textcolor{allanred}{ #1 }}}
