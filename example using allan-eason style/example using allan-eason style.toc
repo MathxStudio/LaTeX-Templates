@@ -1,0 +1,6 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}maths}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}test subsection}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}code}{5}{section.2}%
+\contentsline {section}{\numberline {3}colors}{9}{section.3}%
+\contentsline {section}{\numberline {4}cites}{9}{section.4}%
