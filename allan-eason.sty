@@ -62,8 +62,36 @@
 
 % for title
 \usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+
+\pretitle{
+    \begin{center}
+        \color{black}\normalfont\Huge\bfseries
+}
+\posttitle{
+    \end{center}
+}
+
+\preauthor{
+    \begin{center}
+        \color{black}\normalfont\Large
+}
+\postauthor{
+  \end{center}
+}
+
+\predate{
+    \begin{center}
+        \color{black}\normalfont\large
+}
+\postdate{
+    \end{center}
+}
+
 \titleformat{\section}{\color{black}\normalfont\huge\bfseries}{\color{allandarkblue} Section \textbf{\thesection}}{0.5cm}{}
-\titleformat{\subsection}{\color{black}\normalfont\large\bfseries}{\color{allandarkblue} \textbf{\S \thesubsection}}{0.3cm}{}
+\titleformat{\subsection}{\color{black}\normalfont\Large\bfseries}{\color{allandarkblue} \textbf{\S \thesubsection}}{0.3cm}{}
+\titleformat{\subsubsection}{\color{black}\normalfont\large\bfseries}{\color{allandarkblue} \textbf{\S \thesubsubsection}}{0.1cm}{}
 
 % for hyperlink
 \usepackage[colorlinks, linkcolor = allandarkblue]{hyperref}
