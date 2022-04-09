@@ -1,0 +1,407 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% allan-eason.sty
+% Updated on Mar 22 2022 by Eason Shao
+% Update Detail: Change Version.
+
+% Allan Pan & Eason Shao all rights reserved.
+
+% Remember to put this file in a folder along with other .sty files
+% e.g. C:\Users\Allan\AppData\Local\Programs\MiKTeX\tex\latex\allan
+
+% For the \newcommand part, e.g. \newcommand{\CC}{\mathbb{C}}, all you need to know is that
+% the 'newcommand' is in the first bracket and the effects are in the last bracket. So if you
+% want to type \mathbb{C}, you can simply type \CC. For commands defined with a '[]' in the
+% middle, it means that you can use certain parameters. e.g. \newcommand{\lleq}[1]{\xlongequal{\mathrm{#1}}}.
+% If you want to type '\xlongequal{\mathrm{Lemma}}', you can simply type '\lleq{Lemma}'.
+
+% Problem with the 'lstlisting' environment: please make sure that there are EXACTLY 16 (or usually 4
+% TAB sizes) before the leftmost character.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\ProvidesPackage{allan-eason}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Part One - packages needed
+
+\usepackage{tikz}
+\usepackage{ctex}
+
+\usepackage{soul}
+\usepackage{longtable}
+% for colored frames
+\usepackage[framemethod=TikZ]{mdframed}
+\usetikzlibrary{shadows}
+\usepackage{transparent}
+\usepackage{xcolor}
+\usepackage{mwe}
+\usepackage{graphicx}
+
+% for math display
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{yhmath}
+\usepackage{esint}
+\usepackage{extarrows}
+
+% for python code
+\usepackage{accsupp}
+\newcommand{\emptyaccsupp}[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+\usepackage{listings}
+\usepackage{clrscode3e}
+
+% for font
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+
+% for title
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+
+\pretitle{
+    \begin{center}
+        \color{black}\normalfont\Huge\bfseries
+}
+\posttitle{
+    \end{center}
+}
+
+\preauthor{
+    \begin{center}
+        \color{black}\normalfont\Large
+}
+\postauthor{
+  \end{center}
+}
+
+\predate{
+    \begin{center}
+        \color{black}\normalfont\large
+}
+\postdate{
+    \end{center}
+}
+
+\titleformat{\section}{\color{black}\normalfont\huge\bfseries}{\color{allandarkblue} Section \textbf{\thesection}}{0.5cm}{}
+\titleformat{\subsection}{\color{black}\normalfont\Large\bfseries}{\color{allandarkblue} \textbf{\S \thesubsection}}{0.3cm}{}
+\titleformat{\subsubsection}{\color{black}\normalfont\large\bfseries}{\color{allandarkblue} \textbf{\S \thesubsubsection}}{0.1cm}{}
+
+% for hyperlink
+\usepackage[colorlinks, linkcolor = allandarkblue]{hyperref}
+
+% for headers
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\pagestyle{fancy}
+\lhead{Allan Pan}
+\chead{}
+\rhead{\nouppercase{\leftmark}}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Part Two - Colors
+
+% for colored frames
+\definecolor{allanblue}{rgb}{0.227451,0.372549,0.803922}
+\definecolor{allanred}{rgb}{0.933333,0.172549,0.172549}
+\definecolor{allangreen}{rgb}{0.133333,0.545098,0.133333}
+\definecolor{allanorange}{rgb}{1,0.498039,0}
+\definecolor{allanpurple}{rgb}{0.607843,0.188235,1}
+\definecolor{allancyan}{rgb}{0,0.898039,0.933333}
+\definecolor{allanyellow}{rgb}{1,0.843137,0}
+\definecolor{allandarkblue}{rgb}{0.0980392,0.0980392,0.439216}
+
+% for python code
+\definecolor{commentcolor}{RGB}{85,139,78}
+\definecolor{stringcolor}{RGB}{206,145,108}
+\definecolor{keywordcolor}{RGB}{34,34,250}
+\definecolor{backcolor}{RGB}{220,220,220}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Part Three - Frequent mathematical symbols
+% require packages amsmath and amssymb
+
+\newcommand{\CC}{\mathbb{C}} % complex field
+\newcommand{\FF}{\mathbb{F}} % complete system of residues
+\newcommand{\NN}{\mathbb{N}} % natural number field (1, 2, ...)
+\newcommand{\QQ}{\mathbb{Q}} % rational number field
+\newcommand{\RR}{\mathbb{R}} % real number field
+\newcommand{\ZZ}{\mathbb{Z}} % integer field
+\newcommand{\PP}{\mathbb{P}}
+
+\newcommand{\testmathsymbols}{\[\frac{\left( \frac{1}{\sqrt{2\pi \sigma _{0}^{2}}} \right) ^n\exp \left\{ \frac{\left( -\sum\limits_{i=1}^n{\left( x_i-\mu _0 \right) ^2} \right)}{2\sigma _{0}^{2}} \right\}}{\left\{ \frac{1}{\left( \frac{2\pi}{n} \right) \sum\limits_{i=1}^n{\left( x_i-\mu _0 \right) ^2}} \right\} ^{\frac{n}{2}}e^{-\frac{n}{2}}}\]}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ray}[1]{\overrightarrow{#1}}
+\newcommand{\seg}[1]{\overline{#1}}
+\newcommand{\arc}[1]{\wideparen{#1}}
+\newcommand{\lleq}[1]{\xlongequal{\mathrm{#1}}}
+\newcommand{\at}[2]{\left. #1 \right\vert _{ #2 }}
+
+\newcommand{\ddef}{\xlongequal{\mathrm{def}}}
+\newcommand{\degree}{^\circ}
+\newcommand{\dang}{\measuredangle} % directed angle
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\Rt}{\mathrm{Rt}}
+\newcommand{\diff}{\mathrm{d}} % differential
+\newcommand{\Div}{\mathrm{div}\ } % divergence
+\newcommand{\Grad}{\mathrm{grad}\ } % gradiant
+\newcommand{\Curl}{\mathbf{curl}\ }
+
+\newcommand{\lgor}{\text{ or }}
+\newcommand{\lgand}{\text{ and }}
+\newcommand{\solve}{\text{SOLVE }}
+\newcommand{\Iff}{\text{ iff }}
+\newcommand{\YS}{\text{原式}}
+
+\newenvironment{techlnk}[1]{\color{allandarkblue}\fontfamily{qcr}\selectfont{#1}\normalfont\color{black}}
+
+\newcommand{\defword}[1]{\textbf{\color{allandarkblue} #1}\color{black}}
+\newcommand{\calword}[1]{\textbf{\color{allanorange} #1}\color{black}}
+\newcommand{\answord}[1]{\textbf{\color{allanred} #1}\color{black}}
+\newcommand{\athword}[1]{\textbf{\color{allanpurple} #1}\color{black}}
+
+\newcommand{\defmath}[1]{\color{allandarkblue} #1\color{black}}
+\newcommand{\calmath}[1]{\color{allanorange} #1\color{black}}
+\newcommand{\ansmath}[1]{\color{allanred} #1\color{black}}
+\newcommand{\athmath}[1]{\color{allanpurple} #1\color{black}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Part Four - basic environments and display styles
+
+% for numbered equations
+\newcommand{\sub}[1]{\mdfsubtitle{#1}}
+\newcounter{alemma}[section]
+\newcounter{asublemma}[section]
+\newcommand{\showlemma}{\thesection.\arabic{alemma}}
+\newcommand{\showsublemma}{\thesection.\arabic{asublemma}}
+\newcommand{\updatelemma}{\refstepcounter{alemma}}
+\newcommand{\updatesublemma}{\refstepcounter{asublemma}}
+\newcommand{\sublemma}{\sub{\color{allanred} Proof of Lemma \updatesublemma\showsublemma}}
+
+\newcounter{aclaim}[section]
+\newcounter{asubclaim}[section]
+\newcommand{\showclaim}{\thesection.\arabic{aclaim}}
+\newcommand{\showsubclaim}{\thesection.\arabic{asubclaim}}
+\newcommand{\updateclaim}{\refstepcounter{aclaim}}
+\newcommand{\updatesubclaim}{\refstepcounter{asubclaim}}
+\newcommand{\subclaim}{\sub{\color{allanorange} Proof of Claim \updatesubclaim\showsubclaim}}
+
+\newcounter{afact}[section]
+\newcounter{asubfact}[section]
+\newcommand{\showfact}{\thesection.\arabic{afact}}
+\newcommand{\showsubfact}{\thesection.\arabic{asubfact}}
+\newcommand{\updatefact}{\refstepcounter{afact}}
+\newcommand{\updatesubfact}{\refstepcounter{asubfact}}
+\newcommand{\subfact}{\sub{\color{allangreen} Proof of Fact \updatesubfact\showsubfact}}
+
+% for pseudocode
+\lstset{
+	language=python, 					% Python highlight
+	linewidth=\linewidth,      		    % width of list
+	basicstyle=\tt,
+	commentstyle=\color{commentcolor},
+	keywordstyle=\color{keywordcolor},
+	stringstyle=\color{stringcolor},
+    showstringspaces = false,
+	showspaces=false,
+	numbers=left,						% line numbers on the left
+	numberstyle=\tiny\emptyaccsupp,
+	numbersep=5pt,
+	framerule=0pt,
+	emptylines=1,						% empty lines more than one will be considered as one empty line
+	xleftmargin=0.5cm,
+	tabsize=4,
+	gobble=15							% omit first 4 characters of each line
+    %
+}
+
+\newmdenv[%
+    % documentation: https://mirror.foobar.to/CTAN/macros/latex/contrib/mdframed/mdframed.pdf
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 1pt,
+    roundcorner = 5pt,
+    linecolor = black,
+    backgroundcolor = allanred!5,%
+    %
+    % frametitle settings
+    frametitle = {\color{allanred} Lemma \updatelemma\showlemma},
+    frametitlerule = true,
+    frametitlebackgroundcolor = allanred!15,%
+    %
+    % subtitle settings
+    subtitleabovelinecolor = allanred,
+    subtitlebelowlinecolor = allanred,
+    subtitlebelowline=true,
+    subtitleaboveline=true,
+    subtitlebackgroundcolor = allanred!15,
+    subtitleinneraboveskip = 0.4\baselineskip,
+    subtitleinnerbelowskip = 0.4\baselineskip,
+    % \begin{allanlemma}
+    %     text below title
+    %     \mdfsubtitle{\color{allanred} Proof of Lemma}
+    %         text below subtitle
+    %         $$
+    %         \frac{\left( \frac{1}{\sqrt{2\pi \sigma _{0}^{2}}} \right) ^n\exp \left\{ \frac{\left( -\sum_{i=1}^n{\left( x_i-\mu _0 \right) ^2} \right)}{2\sigma _{0}^{2}} \right\}}{\left\{ \frac{1}{\left( \frac{2\pi}{n} \right) \sum_{i=1}^n{\left( x_i-\mu _0 \right) ^2}} \right\} ^{\frac{n}{2}}e^{-\frac{n}{2}}}
+    %         $$
+    % \end{allanlemma}
+]{allanlemma}
+
+\newmdenv[%
+    % documentation: https://mirror.foobar.to/CTAN/macros/latex/contrib/mdframed/mdframed.pdf
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 1pt,
+    roundcorner = 5pt,
+    linecolor = black,
+    backgroundcolor = allangreen!5,%
+    %
+    % frametitle settings
+    frametitle = {\color{allangreen} Fact \updatefact\showfact},
+    frametitlerule = true,
+    frametitlebackgroundcolor = allangreen!15,%
+    %
+    % subtitle settings
+    subtitleabovelinecolor = allangreen,
+    subtitlebelowlinecolor = allangreen,
+    subtitlebelowline=true,
+    subtitleaboveline=true,
+    subtitlebackgroundcolor = allangreen!15,
+    subtitleinneraboveskip = 0.4\baselineskip,
+    subtitleinnerbelowskip = 0.4\baselineskip,
+]{allanfact}
+
+\newmdenv[%
+    % documentation: https://mirror.foobar.to/CTAN/macros/latex/contrib/mdframed/mdframed.pdf
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 1pt,
+    roundcorner = 5pt,
+    linecolor = black,
+    backgroundcolor = allanorange!5,%
+    %
+    % frametitle settings
+    frametitle = {\color{allanorange} Claim \updateclaim\showclaim},
+    frametitlerule = true,
+    frametitlebackgroundcolor = allanorange!15,%
+    %
+    % subtitle settings
+    subtitleabovelinecolor = allanorange,
+    subtitlebelowlinecolor = allanorange,
+    subtitlebelowline=true,
+    subtitleaboveline=true,
+    subtitlebackgroundcolor = allanorange!15,
+    subtitleinneraboveskip = 0.4\baselineskip,
+    subtitleinnerbelowskip = 0.4\baselineskip,
+]{allanclaim}
+
+\newmdtheoremenv[%
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 1.5pt,
+    roundcorner = 5pt,
+    linecolor = allanblue,
+    backgroundcolor = allanblue!10,
+]{allantheorem}{Theorem}[section]
+
+\mdfdefinestyle{allanremark}{%
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 2.5pt,
+    roundcorner = 0pt,
+    linecolor = black,
+    backgroundcolor = black!10,
+    topline = false,
+    bottomline = false,
+    leftline = true,
+    rightline = false,
+    innertopmargin = 0.3cm,
+}
+
+\newenvironment{allanenvremark}{%
+    \begin{mdframed}[style = allanremark]%
+        \textbf{Remark.}
+}{%
+    \end{mdframed}
+}
+
+\mdfdefinestyle{allanhypothesis}{%
+    skipabove = 0.5cm,
+    skipbelow = 0cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 2.5pt,
+    roundcorner = 0pt,
+    linecolor = allanpurple,
+    backgroundcolor = allanpurple!10,
+    topline = false,
+    bottomline = false,
+    leftline = true,
+    rightline = false,
+    innertopmargin = 0.3cm,
+}
+\newenvironment{allanenvhypothesis}{%
+    \begin{mdframed}[style = allanhypothesis]%
+        \textbf{\color{allanpurple} Hypothesis --}
+}{%
+    \end{mdframed}
+    \textit{Justification --}
+}
+
+
+\newmdenv[%
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 1.5pt,
+    roundcorner = 5pt,
+    linecolor = allandarkblue,
+    backgroundcolor = allandarkblue!5,%
+    %
+    % frametitle settings
+    frametitle = {\color{allandarkblue} Algorithm},
+    frametitlerule = true,
+    frametitlebackgroundcolor = allandarkblue!15,%
+]{allanpy}
+
+\newmdenv[%
+    skipabove = 0.5cm,
+    skipbelow = 0.5cm,
+    leftmargin = 0cm,
+    rightmargin = 0cm,
+    linewidth = 0.7pt,
+    roundcorner = 5pt,
+    linecolor = allandarkblue,%
+    %
+    % frametitle settings
+    frametitle = {\color{allandarkblue} Explanation},
+    frametitlerule = true,
+    frametitlebackgroundcolor = allandarkblue!15,%
+]{allaninpseudo}

@@ -1,0 +1,230 @@
+\documentclass{article}
+\usepackage{../allan-eason}
+
+
+\title{Sample Document using allan-eason.sty}
+\author{Allan Pan and Eason Shao}
+\date{\today}
+
+
+% abcdefghijklmnopqrstuvwxyz
+% zyxwvutsrqpomnlkjihgfedcba
+
+\begin{document}
+    \maketitle
+    \newpage
+    \tableofcontents
+    \newpage
+
+    \section{maths}
+        \url{https://mathxstudio.github.io/} \\
+        % \href{https://mathxstudio.github.io/}{Allan's website} \\
+        \techlnk{https://mathxstudio.github.io/} \\
+        \defword{https://mathxstudio.github.io/} \\
+        https://mathxstudio.github.io/
+        \subsection{test subsection}
+        Let \(n\geq 3\) be a positive integer. Let \(C_1,C_2,\ldots,C_n\) be unit circles in the plane, with centres \(O_1,O_2,\ldots,O_n\) respectively. If no line meets more than two of the circles, prove that:
+        \[\sum\limits_{1\leq i<j\leq n}\dfrac{1}{O_iO_j}\leq \dfrac{(n-1)\pi}{4}.\]
+
+        For brevity, let \(d_{ij}\) be the length of \(O_{ij}\) and let \(\angle(ijk)\) be shorthand for \(\angle O_iO_jO_k\) (or its measure in radians).
+        \\
+        First, we eliminate the circles completely and reduce the problem to angles using the following \textbf{\color{allanred} Lemma}:
+        \\
+        \begin{allanlemma}
+            For any indicies \(i,j,m\) we have the inequalities
+            \[\angle(imj)\geq \max\left(\dfrac{2}{d_{mi}}, \dfrac{2}{d_{mj}}\right)\quad \mathrm{and} \quad \pi -\angle(imj)\geq \max\left(\dfrac{2}{d_{mi}}, \dfrac{2}{d_{mj}}\right)\]
+            \sublemma
+                We first prove the former line. Consider the altitude from \(O_i\) to \(O_mO_j\). The altitude must have length at least \(2\), otherwise its perpendicular bisector passes intersects all of \(C_i, C_m, C_j\). Thus
+                \[2\leq d_{mi}\sin\angle(imj)\leq \angle(imj)\]
+                proving the first line. The seconf line follows by considering the external angle formed by lines \(O_mO_i\) and \(O_mO_j\) instead of the internal one.\(\square\)
+        \end{allanlemma}
+        \showlemma
+        \begin{allanlemma}
+            another test lemma.
+            \sublemma
+                proof of lemma.
+        \end{allanlemma}
+        \showlemma
+        \\
+        Our idea now is for any index \(m\) we will make an estimate on \(\displaystyle \sum_{\substack{1\leq i\leq n\\i\neq b} }{\dfrac{1}{d_{bi}}} \) for each index \(b\). If the centers formed a convex polygon, this would be much simpler, but because we do not have this assumption some more care is needed.
+        \begin{allanclaim}
+            Suppose \(O_a,O_b,O_c\) are consecutive verticies of the convex hull. Then
+            \[\dfrac{n-1}{n-2}\dang(abc)\geq \dfrac{2}{d_{1b}}+\dfrac{2}{d_{2b}}+\ldots+\dfrac{2}{d_{nb}}\]
+            where the term \(\displaystyle \dfrac{2}{d_{bb}}\) does not appear (obviously).
+            \subclaim
+                WLOG let's suppose \((a,b,c)=(2,1,n)\) and that ...
+        \end{allanclaim}
+        another line of text...
+        \begin{allanfact}
+            Describe your fact.
+            \subfact
+                Describe proof.
+        \end{allanfact}
+        another line of text...
+        \begin{allantheorem}[Test theorem]
+            Here is a theorem. Here is a theorem. Here is a theorem. Here is a theorem. Here is a theorem. Here is a theorem.
+        \end{allantheorem}
+        ...
+        \\
+        Now suppose there were \(r\) verticies in the convex hull. If we sum the first claim across all \(b\) on the hull, and the second across all \(b\) not on the hull (inside it), we get
+        $$
+        \begin{aligned}
+            \sum\limits_{1\leq i< j\leq n} \dfrac{2}{d_{ij}}
+            &= \dfrac{1}{2} \sum\limits_{b} \sum\limits_{i\neq b} \dfrac{2}{d_{bi}}
+            \\
+            &\leq \dfrac{1}{2}\cdot\dfrac{n-1}{n-2} ((r-2)\pi + (n-2)\pi)
+            \\
+            &= \dfrac{(n-1)\pi}{4}
+        \end{aligned}
+        $$
+        as needed (with \((r-2)\pi\) being the sum of all angles in the hull.
+
+        \begin{allanenvremark}
+            This is the sixth and last problem of IMO 2002, and is a difficult one. Allan put it here to test the latest style file.
+        \end{allanenvremark}
+
+    \section{code}
+        \begin{allanenvhypothesis}
+            test hypothesis.
+        \end{allanenvhypothesis}
+        type some justifications.
+
+        \begin{allanpy}
+            allanpy
+            \begin{lstlisting}
+                # observation from the air
+
+                %matplotlib inline
+                import numpy as np
+                import matplotlib.pyplot as plt
+
+                v_car=5.611 # 20km/h on average in hk
+                v_eye=16 # Hz
+                alpha_lag=1.00
+                v_reload=alpha_lag*v_eye
+
+                pie=math.pi
+                r_a=13000
+                rho_car=0.001023
+                delta_d_car=v_car/v_reload
+                L_car=4.71769
+                C_eye=40960000
+                alpha_c1=1.00
+                C1=C_eye*alpha_c1
+                alpha_c2=0.90
+                C2=C_eye*alpha_c2
+                alpha_c3=0.80
+                C3=C_eye*alpha_c3
+
+                def alpha_clarity(x):
+                    if x>0 and x<sep_point:
+                        return float(0)
+                    elif x>=sep_point and x<=1:
+                        return $\displaystyle\left[ -\left( \frac{4096}{4095} \right) ^2 \right] \cdot \left[ \left( x-1 \right) ^2+1 \right]$
+                    elif x>1:
+                        return float(1)
+                output=[0 for i in range(len(dataport))]
+                for i in range(len(dataport)):
+                    output[i]=alpha_clarity(dataport[i])
+                dataport=np.arange(0,1.01,0.01)
+                sep_point=1/4096
+            \end{lstlisting}
+            \begin{allaninpseudo}
+                \[\mathrm{data}_i=4\pi \sqrt{r_{a}^{2}-\mathrm{datax}_{i}^{2}}\cdot \rho _{\mathrm{car}}\cdot \Delta d_{\mathrm{car}}\]
+            \end{allaninpseudo}
+        \end{allanpy}
+        another line of text.
+        \begin{lstlisting}
+                # observation from the air
+
+                %matplotlib inline
+                import numpy as np
+                import matplotlib.pyplot as plt
+
+                v_car=5.611 # 20km/h on average in hk
+                v_eye=16 # Hz
+                alpha_lag=1.00
+                v_reload=alpha_lag*v_eye
+
+                pie=math.pi
+                r_a=13000
+                rho_car=0.001023
+                delta_d_car=v_car/v_reload
+                L_car=4.71769
+                C_eye=40960000
+                alpha_c1=1.00
+                C1=C_eye*alpha_c1
+                alpha_c2=0.90
+                C2=C_eye*alpha_c2
+                alpha_c3=0.80
+                C3=C_eye*alpha_c3
+
+                def alpha_clarity(x):
+                    if x>0 and x<sep_point:
+                        return float(0)
+                    elif x>=sep_point and x<=1:
+                        return float((-(4096/4095)**2)*((x-1)**2)+1)
+                    elif x>1:
+                        return float(1)
+                output=[0 for i in range(len(dataport))]
+                for i in range(len(dataport)):
+                    output[i]=alpha_clarity(dataport[i])
+                dataport=np.arange(0,1.01,0.01)
+                sep_point=1/4096
+        \end{lstlisting}
+        \begin{codebox}
+            \Procname{$\proc{Insertion-Sort}(A)$}
+            \li \For $j \gets 2$ \To $\attrib{A}{length}$
+            \li \Do
+            $\id{key} \gets A[j]$
+            \li \Comment Insert $A[j]$ into the sorted sequence
+            $A[1 \twodots j-1]$.
+            \li $i \gets j-1$
+            \li \While $i > 0$ and $A[i] > \id{key}$
+            \li \Do
+            $A[i+1] \gets A[i]$
+            \li $i \gets i-1$
+            \End
+            \li $A[i+1] \gets \id{key}$
+            \End
+        \end{codebox}
+        \begin{codebox}
+            \Procname{$\proc{Segments-Intersect}(p_1, p_2, p_3, p_4)$}
+            \li $d_1 \gets \proc{Direction}(p_3, p_4, p_1)$
+            \li $d_2 \gets \proc{Direction}(p_3, p_4, p_2)$
+            \li $d_3 \gets \proc{Direction}(p_1, p_2, p_3)$
+            \li $d_4 \gets \proc{Direction}(p_1, p_2, p_4)$
+            \li \If $((d_1 > 0 \mbox{ and } d_2 < 0) \mbox{ or }
+            (d_1 < 0 \mbox{ and } d_2 > 0))$ and
+            \Indentmore
+            \zi $((d_3 > 0 \mbox{ and } d_4 < 0) \mbox{ or }
+            (d_3 < 0 \mbox{ and } d_4 > 0))$
+            \End
+            \li \Then \Return \const{true}
+            \li \ElseIf $d_1 \isequal 0$ and $\proc{On-Segment}(p_3, p_4, p_1)$
+            \li \Then \Return \const{true}
+            \li \ElseIf $d_2 \isequal 0$ and $\proc{On-Segment}(p_3, p_4, p_2)$
+            \li \Then \Return \const{true}
+            \li \ElseIf $d_3 \isequal 0$ and $\proc{On-Segment}(p_1, p_2, p_3)$
+            \li \Then \Return \const{true}
+            \li \ElseIf $d_4 \isequal 0$ and $\proc{On-Segment}(p_1, p_2, p_4)$
+            \li \Then \Return \const{true}
+            \li \ElseNoIf \Return \const{false}
+            \End
+        \end{codebox}
+    \section{colors}
+        \color{allanblue} allanblue \color{black}
+        \color{allanred} allanred \color{black}
+        \color{allangreen} allangreen \color{black}
+        \color{allanpurple} allanpurple \color{black}
+        \color{allancyan} allancyan \color{black}
+        \color{allanorange} allanorange \color{black}
+        \color{allanyellow} allanyellow \color{black}
+        \color{allandarkblue} allandarkblue \color{black}
+    \section{cites}
+        I love bibliography. \cite{bibliography}
+    \begin{thebibliography}{30}
+        \bibitem{bibliography} bibliography is important.
+    \end{thebibliography}
+\end{document}
+
