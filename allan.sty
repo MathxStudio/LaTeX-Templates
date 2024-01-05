@@ -62,7 +62,7 @@
 \titleformat{ \subsubsection }{ \color{black}\normalfont\fontfamily{qpl}\selectfont\scriptsize\bfseries } {\color{allandarkblue} \textbf{\thesubsubsection}}{0.3cm}{}
 
 % for hyperlink
-\usepackage[colorlinks, linkcolor = allandarkblue, anchorcolor = allanblue, citecolor = allanblue]{hyperref}
+\usepackage[colorlinks, linkcolor = allancyan, anchorcolor = allanblue, citecolor = allanblue]{hyperref}
 
 % for headers
 
@@ -77,13 +77,13 @@
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0.0pt}
 \pagestyle{fancy}
-% \lhead{Allan Pan}
-% \chead{}
-% \rhead{\nouppercase{\leftmark}}
-% \lfoot{}
-% \cfoot{\thepage}
-% \rfoot{}
-% \setlength\headwidth{\textwidth}
+\lhead{Allan Pan}
+\chead{}
+\rhead{\nouppercase{\leftmark}}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\setlength\headwidth{\textwidth}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Part Two - Colors
@@ -108,6 +108,8 @@
 %% Part Three - Frequent mathematical symbols
 % require packages amsmath and amssymb
 
+\newcommand{\BB}{\mathbb{B}} % open ball in topology
+\newcommand{\BBC}{\overline{\mathbb{B}}} % closed ball in topology
 \newcommand{\CC}{\mathbb{C}} % complex field
 \newcommand{\FF}{\mathbb{F}} % complete system of residues
 \newcommand{\NN}{\mathbb{N}} % natural number field (1, 2, ...)
@@ -115,6 +117,7 @@
 \newcommand{\RR}{\mathbb{R}} % real number field
 \newcommand{\ZZ}{\mathbb{Z}} % integer field
 \newcommand{\PP}{\mathbb{P}} % prime field
+\newcommand{\KK}{\mathbb{K}} % real or complex field (common notation used in vector spaces)
 \newcommand{\testmathsymbols}{\[\frac{\left( \frac{1}{\sqrt{2\pi \sigma _{0}^{2}}} \right) ^n\exp \left\{ \frac{\left( -\sum\limits_{i=1}^n{\left( x_i-\mu _0 \right) ^2} \right)}{2\sigma _{0}^{2}} \right\}}{\left\{ \frac{1}{\left( \frac{2\pi}{n} \right) \sum\limits_{i=1}^n{\left( x_i-\mu _0 \right) ^2}} \right\} ^{\frac{n}{2}}e^{-\frac{n}{2}}}\]}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
@@ -128,18 +131,67 @@
 
 \newenvironment{techlnk}[1]{\color{allandarkblue}\fontfamily{qcr}\selectfont{#1}\normalfont\color{black}}
 
-\newcommand{\defword}[1]{\textbf{\color{allandarkblue} #1 }\color{black}}
+\newcommand{\defword}[1]{\textbf{\color{allandarkblue} #1}\color{black}}
 \newcommand{\itembf}[1]{\item\textbf{#1}}
 \newcommand{\itemit}[1]{\item\textit{#1}}
 \newcommand{\itembfit}[1]{\item\textbf{\textit{#1}}}
+
+\newcommand{\itemdef}[1]{\item \defword{#1}\quad}
+\newcommand{\iteminfo}[1]{\item \textbf{(#1)}}
+
 \newcommand{\testline}{\underline{\hbox to 40mm{}}}
 
 \newcommand{\degree}{^\circ}
 \newcommand{\YS}{\text{原式}}
 \newcommand{\sgn}{\mathrm{sgn}}
 
+% More script letters etc.
+\newcommand{\SA}{\mathcal A}
+\newcommand{\SB}{\mathcal B}
+\newcommand{\SC}{\mathcal C}
+\newcommand{\SF}{\mathcal F}
+\newcommand{\SG}{\mathcal G}
+\newcommand{\SH}{\mathcal H}
+\newcommand{\SO}{\mathcal O}
+\newcommand{\SP}{\mathcal P}
+
+\newcommand{\SCA}{\mathscr A}
+\newcommand{\SCB}{\mathscr B}
+\newcommand{\SCC}{\mathscr C}
+\newcommand{\SCD}{\mathscr D}
+\newcommand{\SCE}{\mathscr E}
+\newcommand{\SCF}{\mathscr F}
+\newcommand{\SCG}{\mathscr G}
+\newcommand{\SCH}{\mathscr H}
+
+% Mathfrak primes
+\newcommand{\km}{\mathfrak m}
+\newcommand{\kp}{\mathfrak p}
+\newcommand{\kq}{\mathfrak q}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Part Four - basic environments and display styles
+
+% for cycle permutations
+\usepackage{xparse}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\cycle}{ O{\;} m }
+ {
+  (
+  \alec_cycle:nn { #1 } { #2 }
+  )
+ }
+
+\seq_new:N \l_alec_cycle_seq
+\cs_new_protected:Npn \alec_cycle:nn #1 #2
+ {
+  \seq_set_split:Nnn \l_alec_cycle_seq { , } { #2 }
+  \seq_use:Nn \l_alec_cycle_seq { #1 }
+ }
+\ExplSyntaxOff
 
 % for numbered equations
 \newcommand{\sub}[1]{\mdfsubtitle{#1}}
